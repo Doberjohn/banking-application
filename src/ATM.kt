@@ -1,110 +1,101 @@
-import java.util.Scanner;
+import java.util.*
 
-class ATM {
-    private CreditCard creditCard;
-    private int previousTransaction;
-    private final Scanner scanner = new Scanner(System.in);
+internal class ATM {
+    private var creditCard: CreditCard? = null
+    private var previousTransaction = 0
+    private val scanner = Scanner(System.`in`)
 
-    public ATM() {}
-
-    private void depositMoney(int amount) {
+    private fun depositMoney(amount: Int) {
         if (amount != 0) {
-            creditCard.addBalance(amount);
-            previousTransaction = amount;
+            creditCard!!.addBalance(amount)
+            previousTransaction = amount
         }
     }
 
-    private void withdrawMoney(int amount) {
+    private fun withdrawMoney(amount: Int) {
         if (amount != 0) {
-            creditCard.removeBalance(amount);
-            previousTransaction = amount;
+            creditCard!!.removeBalance(amount)
+            previousTransaction = amount
         }
     }
 
-    private void showPreviousTransaction() {
+    private fun showPreviousTransaction() {
         if (previousTransaction > 0) {
-            System.out.println("Deposited: " + previousTransaction + creditCard.getCurrency());
+            println("Deposited: " + previousTransaction + creditCard!!.currency)
         } else if (previousTransaction < 0) {
-            System.out.println("Withdrawn: " + Math.abs(previousTransaction) + creditCard.getCurrency());
+            println("Withdrawn: " + Math.abs(previousTransaction) + creditCard!!.currency)
         } else {
-            System.out.println("No transaction available");
+            println("No transaction available")
         }
     }
 
-    private void showCustomerBalance() {
-        System.out.println("\n");
-        System.out.println("============================");
-        System.out.println("Your current balance is " + creditCard.getBalance() + creditCard.getCurrency());
-        System.out.println("============================");
+    private fun showCustomerBalance() {
+        println("\n")
+        println("============================")
+        println("Your current balance is " + creditCard!!.balance + creditCard!!.currency)
+        println("============================")
     }
 
-    private void showWelcomeMessage() {
-        System.out.println("Welcome " + creditCard.getCustomerName());
-        System.out.println("Your card number is " + creditCard.getCreditCardNumber());
-        System.out.println("\n");
+    private fun showWelcomeMessage() {
+        println("Welcome " + creditCard!!.customerName)
+        println("Your card number is " + creditCard!!.creditCardNumber)
+        println("\n")
     }
 
-    private void showAvailableTransactions() {
-        System.out.println("======================");
-        System.out.println("Available transactions");
-        System.out.println("======================");
-        System.out.println("1. Check balance");
-        System.out.println("2. Deposit");
-        System.out.println("3. Withdraw");
-        System.out.println("4. Previous transaction");
-        System.out.println("5. Exit");
-        System.out.println("==========================");
-        System.out.print("Enter transaction code: ");
+    private fun showAvailableTransactions() {
+        println("======================")
+        println("Available transactions")
+        println("======================")
+        println("1. Check balance")
+        println("2. Deposit")
+        println("3. Withdraw")
+        println("4. Previous transaction")
+        println("5. Exit")
+        println("==========================")
+        print("Enter transaction code: ")
     }
 
-    private void showGoodbyeMessage() {
-        System.out.println("===============================================");
-        System.out.println("Thank you dear customer. Hope to see you again!");
-        System.out.println("===============================================");
+    private fun showGoodbyeMessage() {
+        println("===============================================")
+        println("Thank you dear customer. Hope to see you again!")
+        println("===============================================")
     }
 
-    public void insertCard(CreditCard card) {
-        this.creditCard = card;
+    fun insertCard(card: CreditCard?) {
+        creditCard = card
+        var transactionCode: Char
 
-        showWelcomeMessage();
+        showWelcomeMessage()
 
-        char transactionCode;
         do {
-            showAvailableTransactions();
+            showAvailableTransactions()
 
-            transactionCode = scanner.next().charAt(0);
-
-            switch (transactionCode) {
-                case '1': {
-                    showCustomerBalance();
-                    break;
+            transactionCode = scanner.next()[0]
+            when (transactionCode) {
+                '1' -> {
+                    showCustomerBalance()
                 }
-                case '2': {
-                    System.out.print("Enter deposit amount: ");
-                    int depositAmount = scanner.nextInt();
-                    depositMoney(depositAmount);
-                    showCustomerBalance();
-                    break;
+                '2' -> {
+                    print("Enter deposit amount: ")
+                    val depositAmount = scanner.nextInt()
+                    depositMoney(depositAmount)
+                    showCustomerBalance()
                 }
-                case '3': {
-                    System.out.print("Enter withdraw amount: ");
-                    int withdrawAmount = scanner.nextInt();
-                    withdrawMoney(withdrawAmount);
-                    showCustomerBalance();
-                    break;
+                '3' -> {
+                    print("Enter withdraw amount: ")
+                    val withdrawAmount = scanner.nextInt()
+                    withdrawMoney(withdrawAmount)
+                    showCustomerBalance()
                 }
-                case '4': {
-                    showPreviousTransaction();
-                    break;
+                '4' -> {
+                    showPreviousTransaction()
                 }
-                default: {
-                    break;
+                else -> {
                 }
             }
+            println("\n")
+        } while (transactionCode != '5')
 
-            System.out.println("\n");
-        } while (transactionCode != '5');
-
-        showGoodbyeMessage();
+        showGoodbyeMessage()
     }
 }

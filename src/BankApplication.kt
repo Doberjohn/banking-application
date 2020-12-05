@@ -1,9 +1,9 @@
-public class BankApplication {
+object BankApplication {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        val nbgCard = CreditCard("John Fanidis", "€")
+        val atm = ATM()
 
-    public static void main(String[] args) {
-        CreditCard nbgCard = new CreditCard("John Fanidis", "€");
-
-        ATM atm = new ATM();
-        atm.insertCard(nbgCard);
+        atm.insertCard(nbgCard)
     }
 }
