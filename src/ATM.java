@@ -57,6 +57,10 @@ class ATM {
         System.out.print("Enter transaction code: ");
     }
 
+    private void showInvalidTransactionMessage() {
+        System.out.println("The transaction code is not valid. Please try again.");
+    }
+
     private void showGoodbyeMessage() {
         System.out.println("===============================================");
         System.out.println("Thank you dear customer. Hope to see you again!");
@@ -98,6 +102,7 @@ class ATM {
                     break;
                 }
                 default: {
+                    showInvalidTransactionMessage();
                     break;
                 }
             }
