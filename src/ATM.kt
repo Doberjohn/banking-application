@@ -61,7 +61,7 @@ internal class ATM {
         println("===============================================")
     }
 
-    fun insertCard(card: CreditCard?) {
+    fun insertCard(card: CreditCard) {
         creditCard = card
         var transactionCode: Char
 
