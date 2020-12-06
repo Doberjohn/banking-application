@@ -55,6 +55,10 @@ internal class ATM {
         print("Enter transaction code: ")
     }
 
+    private fun showInvalidTransactionMessage() {
+        println("The transaction code is not valid. Please try again.")
+    }
+
     private fun showGoodbyeMessage() {
         println("===============================================")
         println("Thank you dear customer. Hope to see you again!")
@@ -91,6 +95,7 @@ internal class ATM {
                     showPreviousTransaction()
                 }
                 else -> {
+                    showInvalidTransactionMessage()
                 }
             }
             println("\n")
